@@ -1,9 +1,10 @@
+from Battelfield import Battelfield
 class simulation():
-    def __init__(self, name, size_y, size_x):
+    def __init__(self, name, size):
         self.name = name
-        self.world = [range(size_x) for x in range(size_y)]
-        print(self.world)
+        battelfield = Battelfield(1, size)
+        battelfield.printBattelfield()
 
 
-simulation("test", 2, 2)
+simulation("test", 10)
 
