@@ -14,3 +14,8 @@ class Battelfield:
     def printBattelfield(self):
         for rows in self.battelfield:
             print(rows)
+    def addCreature(self, creature):
+        self.allCreatures.append(creature)
+
+    def removeCreature(self, creature):
+        self.allCreatures.remove(creature)
