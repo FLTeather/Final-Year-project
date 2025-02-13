@@ -7,7 +7,7 @@ class Squares:
 
     def __repr__(self):
         if self.creature is not None:
-            return f'{self.creature.name}'
+            return self.creature.name[0:3]
         if self.isWall:
-            return "W"
-        return "."
+            return " W "
+        return " . "
