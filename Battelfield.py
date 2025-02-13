@@ -1,3 +1,4 @@
+from Squares import Squares
 class Battelfield:
     def __init__(self, tn, size):
         self.testNumber = tn
@@ -9,7 +10,15 @@ class Battelfield:
         self.initiativeCount = 0
 
     def setUpBattelfield(self):
-        self.battelfield = [["." for y in range(self.size)] for x in range(self.size)]
+        self.battelfield = [[Squares() for y in range(self.size)] for x in range(self.size)]
+
+        for y in range(self.size):
+            for x in range(self.size):
+                if y == 0 or y == self.size-1:
+                    self.battelfield[y][x].wallEastWest = True
+                elif x == 0 or x == self.size-1:
+                    self.battelfield[y][x].wallNorthSouth= True
+
 
     def printBattelfield(self):
         for rows in self.battelfield:

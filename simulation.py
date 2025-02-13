@@ -6,5 +6,5 @@ class simulation():
         battelfield.printBattelfield()
 
 
-simulation("test", 10)
+simulation("test", 20)
 
