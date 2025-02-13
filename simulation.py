@@ -14,6 +14,7 @@ class simulation():
         self.battelfield.printBattelfield()
 
     def random(self):
+        print(self.battelfield.getAllPossibleMoves( 4, 4, 6))
         print(self.battelfield.moveCreature(self.creatures[0], 4, 4))
         self.battelfield.printBattelfield()
 

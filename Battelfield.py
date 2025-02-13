@@ -44,6 +44,8 @@ class Battelfield:
         while len(allNodes) != 0:
             minValue = min(allNodes, key=allNodes.get)
             currentDistance = allNodes[minValue]
+            if currentDistance > speed:
+                break
             for move in possibleMoves:
                 try:
                     checkDistance = allNodes[(minValue[0]+move[0], minValue[1]+move[1])]
@@ -55,10 +57,7 @@ class Battelfield:
             visitedNodes.update({minValue:currentDistance})
             allNodes.pop(minValue)
 
-        outputNodes = []
-        for keys in visitedNodes:
-            if visitedNodes[keys] <= speed:
-                outputNodes.append(keys)
+        outputNodes = [keys for keys in visitedNodes]
         return outputNodes
 
 
