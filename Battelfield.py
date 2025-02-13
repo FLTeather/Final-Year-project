@@ -14,10 +14,8 @@ class Battelfield:
 
         for y in range(self.size):
             for x in range(self.size):
-                if y == 0 or y == self.size-1:
-                    self.battelfield[y][x].wallEastWest = True
-                elif x == 0 or x == self.size-1:
-                    self.battelfield[y][x].wallNorthSouth= True
+                if y == 0 or y == self.size-1 or x == 0 or x == self.size-1:
+                    self.battelfield[y][x].isWall = True
 
 
     def printBattelfield(self):
