@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Added greedy get all moves algoithm to impliment can move and move." />
+    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Refactored Battelfield.getAllPossibleMoves to not check spaces that could never be reached with movement!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Battelfield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Battelfield.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/Creature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,6 +144,7 @@
       <workItem from="1738685049592" duration="2894000" />
       <workItem from="1738852664551" duration="102000" />
       <workItem from="1739268340435" duration="11304000" />
+      <workItem from="1739460560615" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="Opening commit">
       <option name="closed" value="true" />
@@ -196,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739450209122</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactored Battelfield.getAllPossibleMoves to not check spaces that could never be reached with movement!">
+      <option name="closed" value="true" />
+      <created>1739460935340</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739460935340</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,10 +224,11 @@
     <MESSAGE value="Seeing up Squares dataclass and implimentation" />
     <MESSAGE value="Changed to use W for walls as I am using entire squers for walls" />
     <MESSAGE value="Added greedy get all moves algoithm to impliment can move and move." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added greedy get all moves algoithm to impliment can move and move." />
+    <MESSAGE value="Refactored Battelfield.getAllPossibleMoves to not check spaces that could never be reached with movement!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored Battelfield.getAllPossibleMoves to not check spaces that could never be reached with movement!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1739450112585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1739462240806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Battelfield.coverage" NAME="Battelfield Coverage Results" MODIFIED="1738685434363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_Year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1734690574863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

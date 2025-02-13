@@ -24,10 +24,12 @@ class Battelfield:
     def addCreature(self, creature, y, x):
         self.allCreatures.append(creature)
         self.battelfield[y][x].creature = creature
+        self.battelfield[creature.y][creature.x].isDifficultTerrain = True
         creature.setXY(y, x)
 
     def removeCreature(self, creature):
         self.battelfield[creature.y][creature.x].creature = None
+        self.battelfield[creature.y][creature.x].isDifficultTerrain = False
         self.allCreatures.remove(creature)
 
     def getAllPossibleMoves(self, y, x, speed):
@@ -50,14 +52,16 @@ class Battelfield:
                 try:
                     checkDistance = allNodes[(minValue[0]+move[0], minValue[1]+move[1])]
                     if checkDistance > currentDistance:
-                        allNodes.update({(minValue[0] + move[0], minValue[1] + move[1]): currentDistance + 1})
+                        if self.battelfield[minValue[0]+move[0]][minValue[1]+move[1]].isDifficultTerrain:
+                            allNodes.update({(minValue[0] + move[0], minValue[1] + move[1]): currentDistance + 2})
+                        else:
+                            allNodes.update({(minValue[0] + move[0], minValue[1] + move[1]): currentDistance + 1})
 
                 except KeyError as e:
                     pass # The lack of Key implies the squear is a wall
             visitedNodes.update({minValue:currentDistance})
             allNodes.pop(minValue)
-
-        outputNodes = [keys for keys in visitedNodes]
+        outputNodes = [keys for keys in visitedNodes if self.battelfield[keys[0]][keys[1]].creature is None]
         return outputNodes
 
 
