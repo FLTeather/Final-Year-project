@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Added ability to count difficult terrian for movement function + new part of dataclass Squares">
+    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Added ability to deal damage to other creatures">
+      <change afterPath="$PROJECT_DIR$/Action.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Battelfield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Battelfield.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/Creature.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +149,7 @@
       <workItem from="1748424371102" duration="7000" />
       <workItem from="1748525671156" duration="5080000" />
       <workItem from="1749215785123" duration="875000" />
+      <workItem from="1749472470964" duration="835000" />
     </task>
     <task id="LOCAL-00001" summary="Opening commit">
       <option name="closed" value="true" />
@@ -223,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739462846385</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added ability to deal damage to other creatures">
+      <option name="closed" value="true" />
+      <created>1749472509941</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1749472509941</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,10 +258,11 @@
     <MESSAGE value="Added greedy get all moves algoithm to impliment can move and move." />
     <MESSAGE value="Refactored Battelfield.getAllPossibleMoves to not check spaces that could never be reached with movement!" />
     <MESSAGE value="Added ability to count difficult terrian for movement function + new part of dataclass Squares" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ability to count difficult terrian for movement function + new part of dataclass Squares" />
+    <MESSAGE value="Added ability to deal damage to other creatures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ability to deal damage to other creatures" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1749126272124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1749472515124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Battelfield.coverage" NAME="Battelfield Coverage Results" MODIFIED="1738685434363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_Year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1734690574863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
