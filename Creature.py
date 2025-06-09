@@ -8,7 +8,15 @@ class Creature:
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
         self.y = 0
         self.x = 0
+        self.allMoves = []
 
     def setXY(self, y, x):
         self.y = y
         self.x = x
+
+    def setAllMoves(self, allMoves):
+        self.allMoves = allMoves
+
+    #damage should be passed as a negative value, healing as a postive
+    def takeDamage(self, damage):
+        self.hp += damage

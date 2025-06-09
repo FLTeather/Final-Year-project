@@ -1,4 +1,5 @@
 from Squares import Squares
+
 class Battelfield:
     def __init__(self, tn, size):
         self.testNumber = tn
@@ -26,6 +27,7 @@ class Battelfield:
         self.battelfield[y][x].creature = creature
         self.battelfield[creature.y][creature.x].isDifficultTerrain = True
         creature.setXY(y, x)
+        creature.setAllMoves(self.getAllPossibleMoves(y, x, creature.speed))
 
     def removeCreature(self, creature):
         self.battelfield[creature.y][creature.x].creature = None
@@ -66,7 +68,7 @@ class Battelfield:
 
 
     def canMove(self, creature, y, x):
-        if (y, x) in self.getAllPossibleMoves(creature.y, creature.x, creature.speed):
+        if (y, x) in creature.allMoves:
             return True
         return False
 
@@ -77,3 +79,9 @@ class Battelfield:
         self.addCreature(creature, y, x)
 
         return True
+
+    def dealDamage(self, y, x, damage):
+        if self.battelfield[y][x].creature is None:
+            pass
+        else:
+            self.battelfield[y][x].creature.takeDamage(damage)
