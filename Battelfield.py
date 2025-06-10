@@ -85,3 +85,46 @@ class Battelfield:
             pass
         else:
             self.battelfield[y][x].creature.takeDamage(damage)
+
+    # given two creatures, returns all squares between creatures
+    def lineOfSight(self, creature0, creature1):
+        points = []
+        y0, x0 = creature0.getXY()
+        y1, x1 = creature1.getXY()
+
+        print(y0, x0, y1, x1,)
+
+        steep = abs(y1 - y0) > abs(x1 - x0)
+        if steep:
+            x0, y0 = y0, x0
+            y1, x1 = y1, x1
+        if x0 > x1:
+            x0, x1 = x1, x0
+            y0, y1 = y1, y0
+
+        dx = x1 - x0
+        dy = abs(y1 - y0)
+        error = 0
+        yStep = -1
+        y = y0
+        if y0 < y1:
+            yStep = 1
+
+        for x in range(x0, x1+1):
+            if steep:
+                points.append((x, y))
+            else:
+                points.append((y, x))
+
+            error += dy
+            if error >= dx:
+                y += yStep
+                error -= dx
+        return points
+
+    def canSee(self, creature0, creature1):
+        points = self.lineOfSight(creature0, creature1)
+        for point in points:
+            if self.battelfield[point[0]][point[1]].isWall:
+                return False
+        return True

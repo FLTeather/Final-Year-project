@@ -9,10 +9,14 @@ class Creature:
         self.y = 0
         self.x = 0
         self.allMoves = []
+        self.disengaged = False
 
     def setXY(self, y, x):
         self.y = y
         self.x = x
+
+    def getXY(self):
+        return self.y, self.x
 
     def setAllMoves(self, allMoves):
         self.allMoves = allMoves
@@ -20,3 +24,6 @@ class Creature:
     #damage should be passed as a negative value, healing as a postive
     def takeDamage(self, damage):
         self.hp += damage
+
+    def dash(self):
+        return self.speed * 2
