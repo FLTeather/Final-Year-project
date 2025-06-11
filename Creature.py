@@ -1,8 +1,9 @@
 class Creature:
-    def __init__(self, name, HP, AC):
+    def __init__(self, name, HP, AC, passPerc, battelfield):
         self.name = name
         self.HP = HP
         self.AC = AC
+        self.passivePercetion = passPerc
         self.actions = []
         self.bonusActions = []
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
@@ -10,6 +11,8 @@ class Creature:
         self.x = 0
         self.allMoves = []
         self.disengaged = False
+        self.isHidden = False
+        self.battelfield = battelfield
 
     def setXY(self, y, x):
         self.y = y
@@ -27,3 +30,9 @@ class Creature:
 
     def dash(self):
         return self.speed * 2
+
+    def hide(self):
+        if self.battelfield.canHide(self):
+            self.isHidden = True
+        else:
+            self.isHidden = False
