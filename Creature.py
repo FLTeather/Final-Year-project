@@ -1,3 +1,4 @@
+from random import randint
 class Creature:
     def __init__(self, name, HP, AC, passPerc, battelfield):
         self.name = name
@@ -21,6 +22,9 @@ class Creature:
     def getXY(self):
         return self.y, self.x
 
+    def rollD20(self):
+        return randint(1, 20)
+
     def setAllMoves(self, allMoves):
         self.allMoves = allMoves
 
@@ -36,3 +40,9 @@ class Creature:
             self.isHidden = True
         else:
             self.isHidden = False
+
+    def attack(self, damage, attackMod, target):
+        if target.ac > self.rollD20()+attackMod:
+            target.takeDamage(damage)
+
+
