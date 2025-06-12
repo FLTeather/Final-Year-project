@@ -37,7 +37,7 @@ class Battelfield:
     def getAllPossibleMoves(self, y, x, speed):
         allNodes = {}
         visitedNodes = {}
-        possibleMoves = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 0), (0, 1), (1, -1), (1, 0), (1, 1)]
+        possibleMoves = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
         for a in range(self.size):
             for b in range(self.size):
                 if self.battelfield[a][b].isWall:
@@ -73,8 +73,13 @@ class Battelfield:
         return False
 
     def moveCreature(self, creature, y, x):
+        oldY, oldX = creature.getXY()
         if not self.canMove(creature, y, x):
             return False
+        possibleDirections = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        for direction in possibleDirections:
+            if self.battelfield[oldY-direction[0]][oldX-direction[1]].creature is not None:
+                self.battelfield[oldY - direction[0]][oldX - direction[1]].creature.oppetuinityAttack(creature)
         self.removeCreature(creature)
         self.addCreature(creature, y, x)
 
