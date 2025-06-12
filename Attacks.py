@@ -1,4 +1,4 @@
-class Action:
+class Attack:
     def __init__(self, name, damage, range, atriType):
         self.name = name # str
         self.damage = damage # str

@@ -130,9 +130,8 @@ class Battelfield:
         return True
 
     def canHide(self, creature):
-        allCreatures = self.allCreatures.remove(creature)
         highPassivePerception = 0
-        for creatures in allCreatures:
+        for creatures in self.allCreatures:
             # Creatures can hide if visible from teammates
             if type(creatures) == type(creature):
                 continue
@@ -144,7 +143,11 @@ class Battelfield:
 
         diceroll = int(input("Enter dice roll: "))
         if diceroll > highPassivePerception:
+            print("working")
             return True
         else:
             return False
+
+    def allSeenCreatures(self, creature):
+        return [creatures for creatures in self.allCreatures if self.canSee(creatures, creature)]
 
