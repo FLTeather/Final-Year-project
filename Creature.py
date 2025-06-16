@@ -5,21 +5,21 @@ class Creature:
         self.HP = HP
         self.AC = AC
         self.passivePercetion = passPerc
-        self.actions = []
+        self.actions = ["disengage", "dash", "hide", "help", "meleeAttack"]
         self.bonusActions = []
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
+        self.roundspeed = 0
         self.y = 0
         self.x = 0
-        self.allMoves = []
         self.disengaged = False
         self.isHidden = False
         self.battelfield = battelfield
         self.strength = stre
         self.dexterity = dex
         self.profMod = 2
-        self.hasAdvantage = False
+        self.hasAdvantage = False # If you have advantage on attacks
+        self.isAdvantage = False #If someone has advantage to hit you
         self.canReact = True # True when can be used
-
 
     def setXY(self, y, x):
         self.y = y
@@ -47,27 +47,36 @@ class Creature:
 
     #damage should be passed as a negative value, healing as a postive
     def takeDamage(self, damage):
-        self.hp += damage
+        self.HP += damage
 
     def dash(self):
         return self.speed * 2
 
-    def hide(self):
+    def hide(self, dc):
         if self.battelfield.canHide(self):
-            self.isHidden = True
+            if self.rollD20()+self.dexterity >= dc:
+                self.isHidden = True
         else:
             self.isHidden = False
+    def search(self, dc):
+        if dc > self.rollD20():
+            self.isHidden = False
 
-    def attack(self, damage, attackMod, target, addvantage=False, disadvantage=False):
-        if target.ac > self.rollD20()+attackMod:
-            target.takeDamage(damage, addvantage, disadvantage)
+    def disengage(self):
+        self.disengaged = True
+
+    def meleeAttack(self, target, addvantage=False, disadvantage=False):
+        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+4:
+            target.takeDamage(self.rollDX(4))
 
     def oppetuinityAttack(self, target):
         if self.canReact:
             maxStat = max(self.strength, self.dexterity)
-            self.attack(self.rollDX(4), maxStat+self.profMod, target, addvantage=self.isHidden or self.hasAdvantage, disadvantage=target.isHidden)
+            self.meleeAttack(self.rollDX(4), maxStat+self.profMod, target, addvantage=self.isHidden or self.hasAdvantage or target.isAdvantage, disadvantage=target.isHidden)
         self.canReact = False
 
+    def help(self, creature):
+        creature.isAdvantage = True
 
 
 

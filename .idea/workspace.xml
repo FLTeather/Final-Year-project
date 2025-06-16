@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Attack methord added" />
+    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Opetunity attacks added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Battelfield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Battelfield.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/Creature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monster.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monster.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +151,8 @@
       <workItem from="1748424371102" duration="7000" />
       <workItem from="1748525671156" duration="5080000" />
       <workItem from="1749215785123" duration="875000" />
-      <workItem from="1749472470964" duration="12278000" />
+      <workItem from="1749472470964" duration="16507000" />
+      <workItem from="1750098348562" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="Opening commit">
       <option name="closed" value="true" />
@@ -268,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749723952940</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Opetunity attacks added">
+      <option name="closed" value="true" />
+      <created>1749724718140</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1749724718140</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +315,8 @@
     <MESSAGE value="Can hide implimentation" />
     <MESSAGE value="Added a methord to get all the creatures seen by a creature" />
     <MESSAGE value="Attack methord added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Attack methord added" />
+    <MESSAGE value="Opetunity attacks added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Opetunity attacks added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

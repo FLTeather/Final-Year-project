@@ -73,18 +73,22 @@ class Battelfield:
         return False
 
     def moveCreature(self, creature, y, x):
-        oldY, oldX = creature.getXY()
         if not self.canMove(creature, y, x):
             return False
-        possibleDirections = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-        for direction in possibleDirections:
-            if self.battelfield[oldY-direction[0]][oldX-direction[1]].creature is not None:
-                self.battelfield[oldY - direction[0]][oldX - direction[1]].creature.oppetuinityAttack(creature)
+        if not creature.disengaged:
+            self.opponentAttack(creature)
         self.removeCreature(creature)
         self.addCreature(creature, y, x)
-
         return True
 
+    def opponentAttack(self, creature):
+        oldY, oldX = creature.getXY()
+        possibleDirections = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        for direction in possibleDirections:
+            creatureDirection = self.battelfield[oldY - direction[0]][oldX - direction[1]].creature
+            if creatureDirection is not None and type(creatureDirection) == type(creature):
+                creatureDirection.oppetuinityAttack(creature)
+        return True
     def dealDamage(self, y, x, damage):
         if self.battelfield[y][x].creature is None:
             pass
