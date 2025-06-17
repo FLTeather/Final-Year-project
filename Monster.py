@@ -1,8 +1,8 @@
 from Creature import Creature
 class Monster(Creature):
-    def __init__(self, name, HP, AC, passPerc, battelfield, stre, dex, con, inte, wiz, char, group, profBonus, speed, skills, meleeRange, meleeDam, rangedRange, rangedDam, attackMod, actions, bonusActions):
+    def __init__(self, name, HP, AC, passPerc, battelfield, stre, dex, con, inte, wiz, char, type, profBonus, speed, skills, meleeRange, meleeDam, rangedRange, rangedDam, attackMod, actions, bonusActions):
         Creature.__init__(self, name, HP, AC, passPerc, battelfield, stre, dex)
-        self.gruop = group # Goblin
+        self.type = type
         self.profMod = profBonus
         self.speed = speed/5
         self.wizdom = wiz
@@ -16,7 +16,9 @@ class Monster(Creature):
         self.rangedDam = rangedDam
         self.attackMod = attackMod
         self.actions += actions
+        self.actions.update({"ranged attack": self.rangedAttack})
         self.bonusActions += bonusActions
+        self.abilityTracking = {}  # ability name : usesleft
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
         if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:

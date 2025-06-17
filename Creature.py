@@ -3,9 +3,10 @@ class Creature:
     def __init__(self, name, HP, AC, passPerc, battelfield, stre, dex):
         self.name = name
         self.HP = HP
+        self.maxHP = HP
         self.AC = AC
         self.passivePercetion = passPerc
-        self.actions = ["disengage", "dash", "hide", "help", "meleeAttack"]
+        self.actions = {"disengage": self.disengaged, "dash": self.dash, "hide" :self.hide, "help":self.help, "meleeAttack":self.meleeAttack}
         self.bonusActions = []
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
         self.roundspeed = 0
@@ -21,7 +22,7 @@ class Creature:
         self.isAdvantage = False #If someone has advantage to hit you
         self.canReact = True # True when can be used
 
-    def setXY(self, y, x):
+    def setYX(self, y, x):
         self.y = y
         self.x = x
 
@@ -45,9 +46,9 @@ class Creature:
     def setAllMoves(self, allMoves):
         self.allMoves = allMoves
 
-    #damage should be passed as a negative value, healing as a postive
+    #damage should be passed as a postive value, healing as a negative
     def takeDamage(self, damage):
-        self.HP += damage
+        self.HP -= damage
 
     def dash(self):
         return self.speed * 2
@@ -66,8 +67,8 @@ class Creature:
         self.disengaged = True
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+4:
-            target.takeDamage(self.rollDX(4))
+        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
+            target.takeDamage(self.rollDX(4)+self.strength)
 
     def oppetuinityAttack(self, target):
         if self.canReact:

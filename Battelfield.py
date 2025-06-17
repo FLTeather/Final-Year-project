@@ -95,6 +95,15 @@ class Battelfield:
         else:
             self.battelfield[y][x].creature.takeDamage(damage)
 
+    def dealDexSaveDamage(self, y, x, damage):
+        if self.battelfield[y][x].creature is None:
+            pass
+        else:
+            if self.battelfield[y][x].creature.rollD20()+self.battelfield[y][x].creature.dexterity:
+                self.battelfield[y][x].creature.takeDamage(damage)
+            else:
+                self.battelfield[y][x].creature.takeDamage(damage//2)
+
     # given two creatures, returns all squares between creatures
     def lineOfSight(self, creature0, creature1):
         points = []
@@ -157,6 +166,6 @@ class Battelfield:
         else:
             return False
 
-    def allSeenCreatures(self, creature):
+    def allSeenCreatures(self, creature, ranged=0):
         return [creatures for creatures in self.allCreatures if self.canSee(creatures, creature)]
 
