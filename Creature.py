@@ -21,6 +21,7 @@ class Creature:
         self.hasAdvantage = False # If you have advantage on attacks
         self.isAdvantage = False #If someone has advantage to hit you
         self.canReact = True # True when can be used
+        self.abilityTracking = {}  # ability name : usesleft
 
     def setYX(self, y, x):
         self.y = y

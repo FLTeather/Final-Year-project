@@ -16,7 +16,7 @@ class Monster(Creature):
         self.rangedDam = rangedDam
         self.attackMod = attackMod
         self.actions.update({"ranged attack": self.rangedAttack})
-        self.abilityTracking = {}  # ability name : usesleft
+
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
         if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:

@@ -6,17 +6,16 @@ class Character(Creature):
         self.charisma = char
         self.inteligence = inte
         self.consitution = con
-        self.assignClass(klass, level)
         self.meleeRange = 1
         self.meleeDam = 4
         self.rangedRange = 10
         self.rangedDam = 4
-        self.abilityTracking = {} #ability name : usesleft
+
         self.level = level
         self.actions.update({"ranged attack": self.rangedAttack})
-
+        self.assignClass(klass, level)
     def assignClass(self, klass, level):
-        self.classes = {"cleric": self.paladin, "wizard": self.wizard, "fighter": self.fighter}
+        self.classes = {"paladin": self.paladin, "wizard": self.wizard, "fighter": self.fighter}
         if klass in self.classes.keys():
             self.classes[klass.lower()](level)
         else:
@@ -51,7 +50,6 @@ class Character(Creature):
 
 
     def wizard (self, level):
-        print("wizard")
         self.meleeDam = 6 #Quaterstaff
 
         self.actions.pop("ranged attack")
@@ -67,7 +65,7 @@ class Character(Creature):
     def mageArmour(self):
         if self.abilityTracking.get("Level 1 spell slots") >0:
             self.abilityTracking["Level 1 spell slots"] -= 1
-            self.AC = 16
+            self.AC = 16+self.wizdom
         else:
             raise ValueError("Level 1 spell slots less than 1")
 

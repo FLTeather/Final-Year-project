@@ -24,6 +24,8 @@ class Battelfield:
         print("\n\n")
     def addCreature(self, creature, y, x):
         self.allCreatures.append(creature)
+        if self.battelfield[y][x].creature != None:
+            raise ("Another creature already in space")
         self.battelfield[y][x].creature = creature
         self.battelfield[creature.y][creature.x].isDifficultTerrain = True
         creature.setYX(y, x)
