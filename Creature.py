@@ -6,8 +6,8 @@ class Creature:
         self.maxHP = HP
         self.AC = AC
         self.passivePercetion = passPerc
-        self.actions = {"disengage": self.disengaged, "dash": self.dash, "hide" :self.hide, "help":self.help, "meleeAttack":self.meleeAttack}
-        self.bonusActions = []
+        self.actions = {"disengage": self.disengage, "dash": self.dash, "hide" :self.hide, "help":self.help, "meleeAttack":self.meleeAttack}
+        self.bonusActions = {}
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
         self.roundspeed = 0
         self.y = 0
@@ -78,6 +78,12 @@ class Creature:
 
     def help(self, creature):
         creature.isAdvantage = True
+
+    def addBonusAction(self, key, action):
+        self.bonusActions.update({key:action})
+
+    def addAction(self, key, action):
+        self.actions.update({key:action})
 
 
 

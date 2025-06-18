@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Monster class implimented enough that goblins could be added">
+    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Wizard, fighter, paladin added :D">
+      <change afterPath="$PROJECT_DIR$/Tester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Battelfield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Battelfield.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/Character.py" afterDir="false" />
@@ -51,6 +52,7 @@
   "keyToString": {
     "Python.Battelfield.executor": "Run",
     "Python.Character.executor": "Run",
+    "Python.Tester.executor": "Run",
     "Python.simulation.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -68,7 +70,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Python.Character">
+  <component name="RunManager" selected="Python.Tester">
     <configuration name="Battelfield" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Final Year project" />
       <option name="ENV_FILES" value="" />
@@ -115,6 +117,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Tester" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Final Year project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="simulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Final Year project" />
       <option name="ENV_FILES" value="" />
@@ -140,6 +165,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Tester" />
         <item itemvalue="Python.Character" />
         <item itemvalue="Python.simulation" />
         <item itemvalue="Python.Battelfield" />
@@ -179,7 +205,8 @@
       <workItem from="1749215785123" duration="875000" />
       <workItem from="1749472470964" duration="16507000" />
       <workItem from="1750098348562" duration="1318000" />
-      <workItem from="1750145706193" duration="8386000" />
+      <workItem from="1750145706193" duration="9245000" />
+      <workItem from="1750269751612" duration="1480000" />
     </task>
     <task id="LOCAL-00001" summary="Opening commit">
       <option name="closed" value="true" />
@@ -317,7 +344,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750098977303</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Wizard, fighter, paladin added :D">
+      <option name="closed" value="true" />
+      <created>1750171472575</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1750171472575</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +387,8 @@
     <MESSAGE value="Attack methord added" />
     <MESSAGE value="Opetunity attacks added" />
     <MESSAGE value="Monster class implimented enough that goblins could be added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Monster class implimented enough that goblins could be added" />
+    <MESSAGE value="Wizard, fighter, paladin added :D" />
+    <option name="LAST_COMMIT_MESSAGE" value="Wizard, fighter, paladin added :D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -369,6 +405,7 @@
     <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1750146448446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Battelfield.coverage" NAME="Battelfield Coverage Results" MODIFIED="1738685434363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_Year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1734690574863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_year_project$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1750271196174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Character.coverage" NAME="Character Coverage Results" MODIFIED="1750146578019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

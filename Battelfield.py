@@ -26,7 +26,7 @@ class Battelfield:
         self.allCreatures.append(creature)
         self.battelfield[y][x].creature = creature
         self.battelfield[creature.y][creature.x].isDifficultTerrain = True
-        creature.setXY(y, x)
+        creature.setYX(y, x)
         creature.setAllMoves(self.getAllPossibleMoves(y, x, creature.speed))
 
     def removeCreature(self, creature):
@@ -82,7 +82,7 @@ class Battelfield:
         return True
 
     def opponentAttack(self, creature):
-        oldY, oldX = creature.getXY()
+        oldY, oldX = creature.getYX()
         possibleDirections = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
         for direction in possibleDirections:
             creatureDirection = self.battelfield[oldY - direction[0]][oldX - direction[1]].creature
@@ -107,8 +107,8 @@ class Battelfield:
     # given two creatures, returns all squares between creatures
     def lineOfSight(self, creature0, creature1):
         points = []
-        y0, x0 = creature0.getXY()
-        y1, x1 = creature1.getXY()
+        y0, x0 = creature0.getYX()
+        y1, x1 = creature1.getYX()
 
         print(y0, x0, y1, x1,)
 

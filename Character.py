@@ -126,5 +126,3 @@ class Character(Creature):
     def rangedAttack(self, target, addvantage=False, disadvantage=False):
         if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.strength)
-
-Character("rob", 5, 5, 10, "IDC", 1, 2, 3, 4, 5, 6, "widard", 1)
