@@ -38,3 +38,6 @@ Fighter = Character("Cather", 13, 10, 10, battelfield, 3, 3, 3, -1, 0, 0, "fight
 battelfield.addCreature(Fighter, -4, -2)
 
 battelfield.printBattelfield()
+
+print(Fighter.rangedAttack(goblin4))
+print(goblin4.HP, "HP")

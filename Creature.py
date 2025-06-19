@@ -50,6 +50,8 @@ class Creature:
     #damage should be passed as a postive value, healing as a negative
     def takeDamage(self, damage):
         self.HP -= damage
+        if self.HP <= 0:
+            print(self.name, " has died")
 
     def dash(self):
         return self.speed * 2
@@ -68,14 +70,19 @@ class Creature:
         self.disengaged = True
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
+        if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
             target.takeDamage(self.rollDX(4)+self.strength)
+            return 1
+        return 0
 
     def oppetuinityAttack(self, target):
         if self.canReact:
             maxStat = max(self.strength, self.dexterity)
             self.meleeAttack(self.rollDX(4), maxStat+self.profMod, target, addvantage=self.isHidden or self.hasAdvantage or target.isAdvantage, disadvantage=target.isHidden)
+            return 1
+
         self.canReact = False
+        return 0
 
     def help(self, creature):
         creature.isAdvantage = True

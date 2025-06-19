@@ -28,7 +28,7 @@ sim = simulation("test", 20)
 sim.addCreature("Dave",  1, 10, 2, 2, 12)
 sim.random()
 
-#sim.battelfield.battelfield[2][3].isWall = True
+sim.battelfield.battelfield[2][3].isWall = True
 sim.battelfield.printBattelfield()
 
 sim.line(sim.creatures[0], sim.creatures[1])

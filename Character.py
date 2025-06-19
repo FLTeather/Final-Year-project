@@ -118,9 +118,12 @@ class Character(Creature):
             raise ValueError("Second wind less than 0")
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
+        if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.strength)
-
+            return 1
+        return 0
     def rangedAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
+        if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.strength+self.profMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.strength)
+            return 1
+        return 0

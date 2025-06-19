@@ -19,12 +19,16 @@ class Monster(Creature):
 
 
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
+        if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.attackMod-self.profMod)
+            return 1
+        return 0
 
     def rangedAttack(self, target, addvantage=False, disadvantage=False):
-        if target.ac <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
+        if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.attackMod-self.profMod)
+            return 1
+        return 0
 
 
 
