@@ -2,6 +2,7 @@ from Battelfield import Battelfield
 from Character import Character
 from Monster import Monster
 from copy import deepcopy
+from MonsterController import MonsterController
 
 
 battelfield = Battelfield(1, 10)
@@ -24,8 +25,8 @@ goblin4.name = "4Goblin"
 
 battelfield.addCreature(goblin1, 1, 1)
 battelfield.addCreature(goblin2, 1, 2)
-battelfield.addCreature(goblin3, 1, 3)
-battelfield.addCreature(goblin4, 1, 4)
+battelfield.addCreature(goblin3, 2, 1)
+battelfield.addCreature(goblin4, 2, 2)
 
 
 wizard = Character("Jeff", 7, 10, 11, battelfield, -1, 1, 1, 3, 1, -1, "wizard", 1)
@@ -35,9 +36,15 @@ paladin = Character("Lucy", 13, 10, 10, battelfield, 3, 1, 3, -2, 0, 3, "paladin
 battelfield.addCreature(paladin, -3, -2)
 
 Fighter = Character("Cather", 13, 10, 10, battelfield, 3, 3, 3, -1, 0, 0, "fighter", 1)
-battelfield.addCreature(Fighter, -4, -2)
+battelfield.addCreature(Fighter, -2, -3)
 
 battelfield.printBattelfield()
 
 print(Fighter.rangedAttack(goblin4))
 print(goblin4.HP, "HP")
+
+battelfield.rollInitive()
+
+Mcontroller = MonsterController(battelfield)
+Mcontroller.addMonster(goblin1)
+Mcontroller.takeTurn(goblin1)

@@ -1,6 +1,7 @@
 from random import randint
 class Creature:
     def __init__(self, name, HP, AC, passPerc, battelfield, stre, dex):
+        self.controller = None
         self.name = name
         self.HP = HP
         self.maxHP = HP
@@ -14,6 +15,7 @@ class Creature:
         self.x = 0
         self.disengaged = False
         self.isHidden = False
+        self.isDodged = False
         self.battelfield = battelfield
         self.strength = stre
         self.dexterity = dex
@@ -92,6 +94,12 @@ class Creature:
 
     def addAction(self, key, action):
         self.actions.update({key:action})
+
+    def dodge(self):
+        self.isDodged = True
+
+    def __repr__(self):
+        return self.name
 
 
 

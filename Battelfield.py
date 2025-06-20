@@ -7,7 +7,7 @@ class Battelfield:
         self.allCreatures = []
         self.battelfield = []
         self.setUpBattelfield()
-        self.initiativeOrder = {} # creature, initive number
+        self.initiativeOrder = []
         self.initiativeCount = 0
 
     def setUpBattelfield(self):
@@ -170,4 +170,29 @@ class Battelfield:
 
     def allSeenCreatures(self, creature, ranged=0):
         return [creatures for creatures in self.allCreatures if self.canSee(creatures, creature)]
+
+    def rollInitive(self):
+        for creatures in self.allCreatures:
+            inti = creatures.rollD20()+creatures.dexterity
+            self.initiativeOrder.append([inti, creatures])
+
+        self.sortCreatures()
+        print(self.initiativeOrder)
+
+    def sortCreatures(self):
+        self.initiativeOrder.sort(
+            key=lambda x: (-x[0], -x[1].dexterity, x[1].name.lower())
+        )
+    def nextTurn(self):
+        if self.initiativeCount < 0:
+            self.initiativeCount = 30
+            return self.nextTurn()
+
+        if self.initiativeOrder[self.initiativeCount] == None:
+            self.initiativeCount -= 1
+            return self.nextTurn()
+
+        return self.initiativeOrder[self.initiativeCount]
+
+
 
