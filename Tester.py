@@ -1,11 +1,12 @@
 from Battelfield import Battelfield
-from Character import Character
-from Monster import Monster
 from copy import deepcopy
 from MonsterController import MonsterController
+from PlayerController import PlayerController
+from Monster import Monster
+from Character import Character
 
 
-battelfield = Battelfield(1, 10)
+battelfield = Battelfield(1, 15)
 battelfield.printBattelfield()
 
 
@@ -23,28 +24,34 @@ goblin3.name = "3Goblin"
 goblin4 = deepcopy(goblin)
 goblin4.name = "4Goblin"
 
-battelfield.addCreature(goblin1, 1, 1)
-battelfield.addCreature(goblin2, 1, 2)
-battelfield.addCreature(goblin3, 2, 1)
-battelfield.addCreature(goblin4, 2, 2)
+battelfield.addCreature(goblin1, 10, 10)
+battelfield.addCreature(goblin2, 10, 11)
+battelfield.addCreature(goblin3, 11, 10)
+battelfield.addCreature(goblin4, 11, 11)
 
 
 wizard = Character("Jeff", 7, 10, 11, battelfield, -1, 1, 1, 3, 1, -1, "wizard", 1)
-battelfield.addCreature(wizard, -2, -2)
+battelfield.addCreature(wizard, 13, 13)
 
 paladin = Character("Lucy", 13, 10, 10, battelfield, 3, 1, 3, -2, 0, 3, "paladin", 1)
-battelfield.addCreature(paladin, -3, -2)
+battelfield.addCreature(paladin, 12, 13)
 
-Fighter = Character("Cather", 13, 10, 10, battelfield, 3, 3, 3, -1, 0, 0, "fighter", 1)
-battelfield.addCreature(Fighter, -2, -3)
+Fighter = Character("Cath", 13, 10, 10, battelfield, 3, 3, 3, -1, 0, 0, "fighter", 1)
+battelfield.addCreature(Fighter, 13, 12)
 
 battelfield.printBattelfield()
 
-print(Fighter.rangedAttack(goblin4))
-print(goblin4.HP, "HP")
-
 battelfield.rollInitive()
 
-Mcontroller = MonsterController(battelfield)
-Mcontroller.addMonster(goblin1)
-Mcontroller.takeTurn(goblin1)
+battelfield.resetMoves()
+goblin1.takeTrun()
+wizard.takeTrun()
+paladin.takeTrun()
+Fighter.takeTrun()
+print(battelfield.allCreatures)
+if goblin1 in battelfield.allCreatures:
+    print("YES")
+else:
+    print("NO")
+
+

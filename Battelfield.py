@@ -27,14 +27,17 @@ class Battelfield:
         if self.battelfield[y][x].creature != None:
             raise ("Another creature already in space")
         self.battelfield[y][x].creature = creature
-        self.battelfield[creature.y][creature.x].isDifficultTerrain = True
+        self.battelfield[y][x].isDifficultTerrain = True
         creature.setYX(y, x)
         creature.setAllMoves(self.getAllPossibleMoves(y, x, creature.speed))
+        self.resetMoves()
 
     def removeCreature(self, creature):
         self.battelfield[creature.y][creature.x].creature = None
         self.battelfield[creature.y][creature.x].isDifficultTerrain = False
         self.allCreatures.remove(creature)
+
+
 
     def getAllPossibleMoves(self, y, x, speed):
         allNodes = {}
@@ -88,8 +91,8 @@ class Battelfield:
         possibleDirections = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
         for direction in possibleDirections:
             creatureDirection = self.battelfield[oldY - direction[0]][oldX - direction[1]].creature
-            if creatureDirection is not None and type(creatureDirection) == type(creature):
-                creatureDirection.oppetuinityAttack(creature)
+            if creatureDirection is not None and type(creatureDirection) != type(creature):
+                print(creatureDirection.oppetuinityAttack(creature, oldY, oldX))
         return True
     def dealDamage(self, y, x, damage):
         if self.battelfield[y][x].creature is None:
@@ -111,8 +114,6 @@ class Battelfield:
         points = []
         y0, x0 = creature0.getYX()
         y1, x1 = creature1.getYX()
-
-        print(y0, x0, y1, x1,)
 
         steep = abs(y1 - y0) > abs(x1 - x0)
         if steep:
@@ -161,13 +162,6 @@ class Battelfield:
             if self.canSee(creatures, creature):
                 return False
 
-        diceroll = int(input("Enter dice roll: "))
-        if diceroll > highPassivePerception:
-            print("working")
-            return True
-        else:
-            return False
-
     def allSeenCreatures(self, creature, ranged=0):
         return [creatures for creatures in self.allCreatures if self.canSee(creatures, creature)]
 
@@ -194,5 +188,29 @@ class Battelfield:
 
         return self.initiativeOrder[self.initiativeCount]
 
+    def resetMoves(self):
+        for creature in self.allCreatures:
+            y, x = creature.getYX()
+            creature.setAllMoves(self.getAllPossibleMoves(y, x, creature.speed))
+
+    def highPP(self, creature):
+        highestPP = 0
+        for creatures in self.allCreatures:
+            if type(creatures) == type(creature):
+                continue
+            if creatures.passivePercetion > highestPP:
+                highestPP = creatures.passivePercetion
+
+        return highestPP
+
+    def saerch(self, creature, dc):
+        for creatures in self.allCreatures:
+            if not creatures.isHidden:
+                continue
+            if not self.canHide(creatures, creature):
+                pass
+
+            if creatures.rollD20() > dc:
+                creatures.isHidden = False
 
 

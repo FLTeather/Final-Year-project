@@ -1,4 +1,5 @@
 from Creature import Creature
+
 class Monster(Creature):
     def __init__(self, name, HP, AC, passPerc, battelfield, stre, dex, con, inte, wiz, char, type, profBonus, speed, skills, meleeRange, meleeDam, rangedRange, rangedDam, attackMod):
         Creature.__init__(self, name, HP, AC, passPerc, battelfield, stre, dex)
@@ -17,18 +18,17 @@ class Monster(Creature):
         self.attackMod = attackMod
         self.actions.update({"ranged attack": self.rangedAttack})
 
-
     def meleeAttack(self, target, addvantage=False, disadvantage=False):
         if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.attackMod-self.profMod)
-            return 1
-        return 0
+            return "hits"
+        return "misses"
 
     def rangedAttack(self, target, addvantage=False, disadvantage=False):
         if target.AC <= self.rollD20(addvantage=addvantage, disadvantage=disadvantage)+self.attackMod:
             target.takeDamage(self.rollDX(self.meleeDam)+self.attackMod-self.profMod)
-            return 1
-        return 0
+            return "hits"
+        return "misses"
 
 
 

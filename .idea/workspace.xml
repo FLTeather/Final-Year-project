@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="small changes to allow informatino on if attack has hit.">
+    <list default="true" id="b5db8679-e817-4dd2-ae02-a61dad65cbf6" name="Changes" comment="Intitative tracking, over designed next turn function.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Battelfield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Battelfield.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/Character.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/Creature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Monster Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/MonsterController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monster.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayerController.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +40,9 @@
     &quot;accountId&quot;: &quot;00f99531-b7da-4b9b-a6ed-103dc78fc214&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="autoscrollToSource" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -209,6 +213,7 @@
       <workItem from="1750269751612" duration="3153000" />
       <workItem from="1750326277971" duration="3037000" />
       <workItem from="1750412321918" duration="1299000" />
+      <workItem from="1750419358877" duration="18523000" />
     </task>
     <task id="LOCAL-00001" summary="Opening commit">
       <option name="closed" value="true" />
@@ -378,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750351013807</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Intitative tracking, over designed next turn function.">
+      <option name="closed" value="true" />
+      <created>1750419646353</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1750419646353</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,13 +430,14 @@
     <MESSAGE value="Bug fixes" />
     <MESSAGE value="Added tester class to validate classes" />
     <MESSAGE value="small changes to allow informatino on if attack has hit." />
-    <option name="LAST_COMMIT_MESSAGE" value="small changes to allow informatino on if attack has hit." />
+    <MESSAGE value="Intitative tracking, over designed next turn function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Intitative tracking, over designed next turn function." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Final_year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1750146448446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Battelfield.coverage" NAME="Battelfield Coverage Results" MODIFIED="1738685434363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_Year_project$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1734690574863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Final_year_project$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1750412398567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Final_year_project$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1750618045808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Final_year_project$Character.coverage" NAME="Character Coverage Results" MODIFIED="1750146578019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
