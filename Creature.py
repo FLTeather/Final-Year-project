@@ -8,14 +8,14 @@ class Creature:
         self.maxHP = HP
         self.AC = AC
         self.passivePercetion = passPerc
-        self.actions = {"disengage": self.disengage, "dash": self.dash, "hide" :self.hide, "help":self.help, "meleeAttack":self.meleeAttack}
+        self.actions = {"disengage": self.disengage, "dash": self.dash, "hide" :self.hide, "help":self.help, "melee attack":self.meleeAttack}
         self.bonusActions = {}
         self.speed = 6 # Speed as in number of 5ft squares not as in 6ft.
         self.turnSpeed = self.speed
         self.roundspeed = 0
         self.y = 0
         self.x = 0
-        self.disengaged = False
+        self.disengaged = False # False when not disengaged
         self.isHidden = False # False when not hidden
         self.isDodged = False
         self.battelfield = battelfield
@@ -29,34 +29,50 @@ class Creature:
         self.abilityTracking = {}  # ability name : usesleft
         self.allMoves = []
         self.isdead = False
+        self.type = None
+        self.klass = None
 
-    def takeTrun(self):
-        choices = ["move", "action", "bonus"]
+    def takeTurn(self):
+        from Monster import Monster
+        from Character import Character
+        print(self.name + " is taking turn")
+        choices = ["action", "bonus", "move"]
         if len(self.bonusActions) == 0:
             choices.remove("bonus")
         while len(choices) != 0 and not self.isdead:
-            selection = choice(choices)
-            if selection == "move":
-                square = choice(self.getAllAdjecentMoves())
-                self.move(square[0], square[1])
-                self.turnSpeed -= 1
-                print("I moved: ", self.turnSpeed)
-                if self.turnSpeed < 0:
-                    choices.remove("move")
-            elif selection == "action":
+            if self.isdead:
+                choices = []
+            if "action" in choices:
                 if self.takeAction():
                     choices.remove("action")
 
-            elif selection == "bonus":
+            if "bonus" in choices:
                 key = choice([key for key in self.bonusActions])
                 try:
-                    self.bonusActions[key](self.battelfield.dealDamage)
+                    print(self.bonusActions[key](self.battelfield.allCreatures))
                     choices.remove("bonus")
                 except ValueError:
-                    pass
-            if self.isdead:
-                self.battelfield.removeCreature(self)
-            self.battelfield.printBattelfield()
+                    choices.remove("bonus")
+
+            if "move" in choices:
+                try:
+                    if type(self) == Monster:
+                        self.pickAjecentTarget(self.battelfield.allCreatures, Character)
+                    else:
+                        self.pickAjecentTarget(self.battelfield.allCreatures, Monster)
+                    if choices[0] == "move": # This only happens when move is only option
+                        if self.disengaged:
+                            raise ValueError("disengaged") # This is not the best way to reach the other sate but oh well
+                        else:
+                            choices.remove("move")
+
+                except ValueError:
+                    square = choice(self.getAllAdjecentMoves())
+                    self.move(square[0], square[1])
+                    self.turnSpeed -= 1
+                    print(self.name + " moved: ", self.getYX())
+                    if self.turnSpeed < 0:
+                        choices.remove("move")
 
 
 
@@ -64,11 +80,11 @@ class Creature:
         key = choice([key for key in self.actions])
         try:
             shuffle(self.battelfield.allCreatures)
+            print(self.actions[key](self.battelfield.allCreatures))
         except ValueError:
+            print("Invalid action")
             return False
         return True
-
-
     def setYX(self, y, x):
         self.y = y
         self.x = x
@@ -99,6 +115,8 @@ class Creature:
         if self.HP <= 0:
             print(self.name, " has died")
             self.isdead = True
+            self.battelfield.creatureDied(self)
+
 
     def dash(self, targets):
         self.turnSpeed += self.speed
@@ -142,7 +160,7 @@ class Creature:
         self.canReact = False
         addvantage = bool(self.isHidden or self.hasAdvantage or target.isAdvantage)
         disadvantage = target.isHidden
-        output += self.meleeAttack(target, addvantage=addvantage, disadvantage=disadvantage)
+        output += self.meleeAttack([target], addvantage=addvantage, disadvantage=disadvantage)
         return output
 
     def help(self, targets):
@@ -187,10 +205,10 @@ class Creature:
     def pickSingleTarget(self, targets, creatureType):
         n = 0
         target = targets[n]
-        while type(target) == creatureType:
+        while type(target) != creatureType:
+            n = n + 1
             if n > len(targets)-1:
                 raise ValueError("No valid Target")
-            n = n+1
             target = targets[n]
 
         return target

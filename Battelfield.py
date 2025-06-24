@@ -1,3 +1,4 @@
+from Monster import Monster
 from Squares import Squares
 
 class Battelfield:
@@ -36,8 +37,6 @@ class Battelfield:
         self.battelfield[creature.y][creature.x].creature = None
         self.battelfield[creature.y][creature.x].isDifficultTerrain = False
         self.allCreatures.remove(creature)
-
-
 
     def getAllPossibleMoves(self, y, x, speed):
         allNodes = {}
@@ -92,7 +91,7 @@ class Battelfield:
         for direction in possibleDirections:
             creatureDirection = self.battelfield[oldY - direction[0]][oldX - direction[1]].creature
             if creatureDirection is not None and type(creatureDirection) != type(creature):
-                print(creatureDirection.oppetuinityAttack(creature, oldY, oldX))
+                creatureDirection.oppetuinityAttack(creature, oldY, oldX)
         return True
     def dealDamage(self, y, x, damage):
         if self.battelfield[y][x].creature is None:
@@ -178,15 +177,22 @@ class Battelfield:
             key=lambda x: (-x[0], -x[1].dexterity, x[1].name.lower())
         )
     def nextTurn(self):
+        self.initiativeCount -= 1
         if self.initiativeCount < 0:
-            self.initiativeCount = 30
+            self.initiativeCount = len(self.initiativeOrder)
             return self.nextTurn()
-
-        if self.initiativeOrder[self.initiativeCount] == None:
-            self.initiativeCount -= 1
-            return self.nextTurn()
-
         return self.initiativeOrder[self.initiativeCount]
+
+    def winCondision(self):
+        monsters = [monsters for monsters in self.allCreatures if type(monsters) == Monster]
+        players = [chars for chars in self.allCreatures if type(chars) != Monster]
+        if len(monsters) == 0:
+            return 0
+        elif len(players) == 0:
+            return 1
+        else:
+            return 2
+
 
     def resetMoves(self):
         for creature in self.allCreatures:
@@ -212,5 +218,11 @@ class Battelfield:
 
             if creatures.rollD20() > dc:
                 creatures.isHidden = False
+    def creatureDied(self, deadCreature):
+        self.removeCreature(deadCreature)
+        for inatives in self.initiativeOrder:
+            if inatives[1] == deadCreature:
+                self.initiativeOrder.remove(inatives)
+        self.initiativeCount -=1
 
 
