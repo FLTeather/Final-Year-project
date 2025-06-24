@@ -225,4 +225,11 @@ class Battelfield:
                 self.initiativeOrder.remove(inatives)
         self.initiativeCount -=1
 
+    def addGoblin(self, name, hp, y, x):
+        goblin = Monster(name, hp, 15, 9, self, -1, 2, 0, 0, -1, -1, "Goblinoid", 2, 30, {"Stealth": +6}, 1,
+                          6, 80, 6, 4)
+        goblin.addBonusAction("disengage", goblin.actions["disengage"])
+        goblin.addAction("hide", goblin.actions["hide"])
+
+        self.addCreature(goblin, y, x)
 

@@ -27,6 +27,7 @@ class Character(Creature):
                 if self.dyingTracker[1] > 2:
                     self.hasDied()
         self.HP -= damage
+        print(self.name + " has taken " + str(damage) + " damage")
         if self.HP <= 0:
             self.dying = True
             self.HP = 0
@@ -311,7 +312,7 @@ class Character(Creature):
 
         target = self.pickSingleTarget(targets, Monster)
         if target.AC <= self.rollD20(addvantage=target.isAdvantage, disadvantage=disadvantage)+self.strength+self.profMod:
-            target.takeDamage(self.rollDX(self.meleeDam)+self.strength)
+            target.takeDamage(self.rollDX(self.rangedDam)+self.strength)
             output += "\thits" + target.name +"\n"
         else:
             output += "\tmisses" + target.name +"\n"

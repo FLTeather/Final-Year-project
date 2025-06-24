@@ -112,6 +112,7 @@ class Creature:
     #damage should be passed as a postive value, healing as a negative
     def takeDamage(self, damage):
         self.HP -= damage
+        print(self.name + " has taken " + str(damage) + " damage")
         if self.HP <= 0:
             print(self.name, " has died")
             self.isdead = True
