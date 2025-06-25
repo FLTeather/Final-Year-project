@@ -36,7 +36,10 @@ class Battelfield:
     def removeCreature(self, creature):
         self.battelfield[creature.y][creature.x].creature = None
         self.battelfield[creature.y][creature.x].isDifficultTerrain = False
-        self.allCreatures.remove(creature)
+        try:
+            self.allCreatures.remove(creature)
+        except ValueError:
+            pass #no idea how it does this but if its not in the list then it doesn't need to be removed
 
     def getAllPossibleMoves(self, y, x, speed):
         allNodes = {}
@@ -81,6 +84,8 @@ class Battelfield:
             return False
         if not creature.disengaged:
             self.opponentAttack(creature)
+        if creature.isdead:
+            return False
         self.removeCreature(creature)
         self.addCreature(creature, y, x)
         return True
@@ -170,7 +175,6 @@ class Battelfield:
             self.initiativeOrder.append([inti, creatures])
 
         self.sortCreatures()
-        print(self.initiativeOrder)
 
     def sortCreatures(self):
         self.initiativeOrder.sort(
@@ -181,6 +185,9 @@ class Battelfield:
         if self.initiativeCount < 0:
             self.initiativeCount = len(self.initiativeOrder)
             return self.nextTurn()
+        return self.initiativeOrder[self.initiativeCount]
+
+    def currentTurn(self):
         return self.initiativeOrder[self.initiativeCount]
 
     def winCondision(self):
@@ -225,11 +232,4 @@ class Battelfield:
                 self.initiativeOrder.remove(inatives)
         self.initiativeCount -=1
 
-    def addGoblin(self, name, hp, y, x):
-        goblin = Monster(name, hp, 15, 9, self, -1, 2, 0, 0, -1, -1, "Goblinoid", 2, 30, {"Stealth": +6}, 1,
-                          6, 80, 6, 4)
-        goblin.addBonusAction("disengage", goblin.actions["disengage"])
-        goblin.addAction("hide", goblin.actions["hide"])
-
-        self.addCreature(goblin, y, x)
 

@@ -19,14 +19,49 @@ class Monster(Creature):
         self.attackMod = attackMod
         self.actions.update({"ranged attack": self.rangedAttack})
 
+    def MCTS(self, samNum):
+        if self.isdead:
+            return
+
+        from MonteCarloTreeSearch import MonteCarloTreeSearch
+        mtcs = MonteCarloTreeSearch(self.battelfield, isMonster=True)
+
+        while mtcs.n() < samNum:
+            # print("Counter of creature turn checks"+ str(mtcs.n()))
+            mtcs.selection()
+        bestMove = mtcs.best_child().lastMove
+        print(self.name)
+        print(self.turnSpeed)
+        print(bestMove)
+        if bestMove[0] == "action":
+            self.actions[bestMove[1]](self.battelfield.allCreatures)
+            self.choices.remove(bestMove[0])
+        elif bestMove[0] == "bonus":
+            self.bonusActions[bestMove[1]](self.battelfield.allCreatures)
+            self.choices.remove(bestMove[0])
+        elif bestMove[0] == "move":
+            self.move(bestMove[1][0], bestMove[1][1])
+            self.turnSpeed -= 1
+
+        if self.choices == [] or bestMove[0] == None:
+            # Turn ended
+            self.choices = ["action", "move"]
+            self.turnSpeed = self.speed
+            if len(self.bonusActions) != 0:
+                self.choices.append("bonus")
+            return
+
+        self.battelfield.printBattelfield()
+        self.MCTS(samNum)
+
     def takeAction(self):
         try:
-            print(self.actions["melee attack"](self.battelfield.allCreatures))
+            self.actions["melee attack"](self.battelfield.allCreatures)
             return True
         except ValueError:
             pass
         try:
-            print(self.actions["ranged attack"](self.battelfield.allCreatures))
+            self.actions["ranged attack"](self.battelfield.allCreatures)
         except ValueError:
             return False
         return True

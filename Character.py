@@ -27,13 +27,13 @@ class Character(Creature):
                 if self.dyingTracker[1] > 2:
                     self.hasDied()
         self.HP -= damage
-        print(self.name + " has taken " + str(damage) + " damage")
+        #print(self.name + " has taken " + str(damage) + " damage")
         if self.HP <= 0:
             self.dying = True
             self.HP = 0
 
     def hasDied(self):
-        print(self.name, " has died")
+        #print(self.name, " has died")
         self.isdead = True
         self.battelfield.creatureDied(self)
 
@@ -56,23 +56,26 @@ class Character(Creature):
 
 
     def takeTurn(self):
-        print(self.name + " is taking turn")
+        #print(self.name + " is taking turn")
+        self.turnSpeed = self.speed
         if self.dying == True:
             if self.HP > 0:
                 self.dying = False
-            print(self.deathSaves())
+            self.deathSaves()
             return False
-
+        if "action" not in self.choices :
+            super().takeTurn()
         if self.klass == "paladin":
-            print(self.paladinAction())
+            self.paladinAction()
 
         elif self.klass == "fighter":
-            print(self.fightAction())
+            self.fightAction()
 
         elif self.klass == "wizard":
-            print(self.wizardAction())
+            self.wizardAction()
         else:
             super().takeAction()
+        self.choices = ["action", "bonus", "move"]
 
     def paladinAction(self):
         for moves in range(self.turnSpeed):
@@ -94,16 +97,13 @@ class Character(Creature):
             square = choice(self.getAllAdjecentMoves())
             self.move(square[0], square[1])
             self.turnSpeed -= 1
-            print(self.name + " moved: ", self.getYX())
+            #print(self.name + " moved: ", self.getYX())
 
         return self.rangedAttack(self.battelfield.allCreatures)
 
 
     def fightAction(self):
         for moves in range(self.turnSpeed):
-            if self.HP < self.maxHP-6 and self.abilityTracking["second wind"]>0:
-                return self.secondWind(self.battelfield.allCreatures)
-
             try:
                 self.pickAjecentTarget(self.battelfield.allCreatures, Monster)
                 return self.meleeAttack(self.battelfield.allCreatures)
@@ -113,7 +113,7 @@ class Character(Creature):
             square = choice(self.getAllAdjecentMoves())
             self.move(square[0], square[1])
             self.turnSpeed -= 1
-            print(self.name + " moved: ", self.getYX())
+            #print(self.name + " moved: ", self.getYX())
 
         return self.rangedAttack(self.battelfield.allCreatures)
 
@@ -133,13 +133,18 @@ class Character(Creature):
                     return self.chramaticOrb(self.battelfield.allCreatures)
                 else:
                     return self.tollTheDead(self.battelfield.allCreatures)
-
-            square = choice(self.getAllAdjecentMoves())
-            self.move(square[0], square[1])
-            self.turnSpeed -= 1
-            print(self.name + " moved: ", self.getYX())
-        return self.rangedAttack(self.battelfield.allCreatures)
-
+            try:
+                square = choice(self.getAllAdjecentMoves())
+                self.move(square[0], square[1])
+                self.turnSpeed -= 1
+            except IndexError:
+                pass
+                #no avail moves
+            #print(self.name + " moved: ", self.getYX())
+            try:
+                return self.rangedAttack(self.battelfield.allCreatures)
+            except ValueError:
+                return None
     def assignClass(self, klass, level):
         self.classes = {"paladin": self.paladin, "wizard": self.wizard, "fighter": self.fighter}
         if klass in self.classes.keys():
@@ -177,6 +182,8 @@ class Character(Creature):
         target = self.pickAjecentTarget(targets, Character)
         targetY, targetX = target.getYX()
         amount = target.maxHP - target.HP
+        if amount == 0:
+            raise ValueError("cannot heal 0")
         if self.abilityTracking.get("layOnHands") >= amount:
             self.battelfield.dealDamage(targetY, targetX, amount*-1)
             self.abilityTracking["layOnHands"] -= amount

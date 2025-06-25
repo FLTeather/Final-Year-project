@@ -1,38 +1,29 @@
-# This class will handle the turn choice which is why it looks so empty right now.
-from Character import Character
 class PlayerController:
-    def __init__(self, board):
-        self.characters = []
-        self.board = board
+    def __init__(self, board, creature, parent=None, parent_action=None):
+        self.state = board
+        self.creature = creature
+        self.parent = parent
+        self.parent_action = parent_action
+        self.children = []
+        self.number_of_visits = 0
+        self.damage = {"delt":0, "taken":0}
+        self.untried_actions = [30, "action", "bonus"]
+        self.untried_actions = self.untried_actions2()
+        return
 
-    def addMonster(self, character):
-        self.character.append(character)
-        character.monsterController = self
-    def takeTurn(self):
-        creature = self.board.nextTurn()
+    def untried_actions2(self):
+        if self.parent_action is None:
+            return self.untried_actions
+        return self.untried_actions
 
-    def calulateTurn(self):
-        CharacterPostions = [[creature, (creature.getYX())] for creature in self.board.allCreatures if type(creature) == Character]
-        MonsterPostions = [[creature, (creature.getYX())] for creature in self.board.allCreatures if type(creature) == Monster]
-        print(CharacterPostions)
-        print(MonsterPostions)
-        print(self.wizardScore(CharacterPostions[0][0], MonsterPostions))
+    def resultDiffernece(self):
+        return self.damage["delt"] - self.damage["taken"]
 
-    def wizardScore(self, wizard, monsters):
-        count = 0
-        adjecentSquares = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-        wizardSqaure = wizard.getYX()
-        allSqaures = [(wizardSqaure[0]+x[0], wizardSqaure[1]+x[1]) for x in adjecentSquares]
-        for monster in monsters:
-            for move in monster[0].allMoves:
-                if move in allSqaures:
-                    count += 1
-                    break
-        return count
+    def getNumberOfVisits(self):
+        return self.number_of_visits
 
-    def exspectedDamage(self, AC, attackMod):
-        return (21- (AC-attackMod)/20)*100
+    def exspand(self):
+        pass
 
-
-    def pickBestMove(self, dataStructure):
+    def pickAction(self):
         pass

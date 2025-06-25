@@ -31,48 +31,83 @@ class Creature:
         self.isdead = False
         self.type = None
         self.klass = None
+        self.choices = ["action", "move"]
+        if len(self.bonusActions) != 0:
+            self.choices.append("bonus")
+
+    def MCTS(self, samNum):
+        if self.isdead:
+            return
+
+        from MonteCarloTreeSearch import MonteCarloTreeSearch
+        mtcs = MonteCarloTreeSearch(self.battelfield)
+
+        while mtcs.n() < samNum:
+            #print("Counter of creature turn checks"+ str(mtcs.n()))
+            mtcs.selection()
+        bestMove = mtcs.best_child().lastMove
+        print(self.name)
+        print(self.turnSpeed)
+        print(bestMove)
+        if bestMove[0] == "action":
+            self.actions[bestMove[1]](self.battelfield.allCreatures)
+            self.choices.remove(bestMove[0])
+        elif bestMove[0] == "bonus":
+            self.bonusActions[bestMove[1]](self.battelfield.allCreatures)
+            self.choices.remove(bestMove[0])
+        elif bestMove[0] == "move":
+            self.move(bestMove[1][0], bestMove[1][1])
+            self.turnSpeed -= 1
+
+        if self.choices == [] or bestMove[0] == None:
+            #Turn ended
+            self.choices = ["action", "move"]
+            self.turnSpeed = self.speed
+            if len(self.bonusActions) != 0:
+                self.choices.append("bonus")
+            return
+
+        self.battelfield.printBattelfield()
+        self.MCTS(samNum)
+
 
     def takeTurn(self):
         from Monster import Monster
         from Character import Character
-        print(self.name + " is taking turn")
-        choices = ["action", "bonus", "move"]
-        if len(self.bonusActions) == 0:
-            choices.remove("bonus")
-        while len(choices) != 0 and not self.isdead:
+        self.turnSpeed = self.speed
+        #print(self.name + " is taking turn")
+        while len(self.choices) != 0 and not self.isdead:
             if self.isdead:
-                choices = []
-            if "action" in choices:
+                self.choices = []
+            if "action" in self.choices:
                 if self.takeAction():
-                    choices.remove("action")
+                    self.choices.remove("action")
 
-            if "bonus" in choices:
+            if "bonus" in self.choices:
                 key = choice([key for key in self.bonusActions])
                 try:
-                    print(self.bonusActions[key](self.battelfield.allCreatures))
-                    choices.remove("bonus")
+                    self.bonusActions[key](self.battelfield.allCreatures)
+                    self.choices.remove("bonus")
                 except ValueError:
-                    choices.remove("bonus")
+                    self.choices.remove("bonus")
 
-            if "move" in choices:
+            if "move" in self.choices:
                 try:
                     if type(self) == Monster:
                         self.pickAjecentTarget(self.battelfield.allCreatures, Character)
                     else:
                         self.pickAjecentTarget(self.battelfield.allCreatures, Monster)
-                    if choices[0] == "move": # This only happens when move is only option
-                        if self.disengaged:
-                            raise ValueError("disengaged") # This is not the best way to reach the other sate but oh well
-                        else:
-                            choices.remove("move")
+                    if self.choices[0] == "move": # This only happens when move is only option
+                        self.choices.remove("move")
 
                 except ValueError:
                     square = choice(self.getAllAdjecentMoves())
                     self.move(square[0], square[1])
                     self.turnSpeed -= 1
-                    print(self.name + " moved: ", self.getYX())
+                    #print(self.name + " moved: ", self.getYX())
                     if self.turnSpeed < 0:
-                        choices.remove("move")
+                        self.choices.remove("move")
+        self.choices = ["action", "bonus", "move"]
 
 
 
@@ -80,9 +115,9 @@ class Creature:
         key = choice([key for key in self.actions])
         try:
             shuffle(self.battelfield.allCreatures)
-            print(self.actions[key](self.battelfield.allCreatures))
+            self.actions[key](self.battelfield.allCreatures)
         except ValueError:
-            print("Invalid action")
+            #print("Invalid action")
             return False
         return True
     def setYX(self, y, x):
@@ -112,9 +147,9 @@ class Creature:
     #damage should be passed as a postive value, healing as a negative
     def takeDamage(self, damage):
         self.HP -= damage
-        print(self.name + " has taken " + str(damage) + " damage")
+        #print(self.name + " has taken " + str(damage) + " damage")
         if self.HP <= 0:
-            print(self.name, " has died")
+            #print(self.name, " has died")
             self.isdead = True
             self.battelfield.creatureDied(self)
 
