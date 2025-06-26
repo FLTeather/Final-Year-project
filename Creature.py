@@ -41,10 +41,10 @@ class Creature:
 
         from MonteCarloTreeSearch import MonteCarloTreeSearch
         mtcs = MonteCarloTreeSearch(self.battelfield)
-
-        while mtcs.n() < samNum:
-            #print("Counter of creature turn checks"+ str(mtcs.n()))
+        temp = mtcs.selection()
+        while mtcs.n() < 50:
             mtcs.selection()
+
         bestMove = mtcs.best_child().lastMove
         print(self.name)
         print(self.turnSpeed)
@@ -165,7 +165,7 @@ class Creature:
                 return "Hidden"
         else:
             self.isHidden = False
-            return "Failed Hidden"
+            raise ValueError
     def search(self, targets):
         self.battelfield.saerch(self, self.rollD20()+self.wizdom)
         return "Searched"

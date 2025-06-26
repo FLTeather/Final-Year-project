@@ -25,9 +25,7 @@ class Monster(Creature):
 
         from MonteCarloTreeSearch import MonteCarloTreeSearch
         mtcs = MonteCarloTreeSearch(self.battelfield, isMonster=True)
-
-        while mtcs.n() < samNum:
-            # print("Counter of creature turn checks"+ str(mtcs.n()))
+        while mtcs.n() < 200:
             mtcs.selection()
         bestMove = mtcs.best_child().lastMove
         print(self.name)

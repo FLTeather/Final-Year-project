@@ -12,3 +12,5 @@ class Squares:
         if self.isWall:
             return " W "
         return " . "
+
+    

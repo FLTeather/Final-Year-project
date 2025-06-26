@@ -32,7 +32,7 @@ class MonteCarloTreeSearch:
     def expandv2(self):
         #print("expsand v2")
         newBoard = deepcopy(self.board)
-        if len(self.possibleMoves) == 0 and len(self.possibleBonus) == 0 and len(self.possibleMoves) == 0:
+        if len(self.possibleMoves) == 0 and len(self.possibleBonus) == 0 and len(self.possibleActions) == 0:
             self.fullExspanded = True
             newBoard.nextTurn()
             self.children.append(MonteCarloTreeSearch(newBoard, self, isMonster=self.isMonster))
@@ -95,18 +95,24 @@ class MonteCarloTreeSearch:
 
         # create child who took this move
         childBoard = deepcopy(newBoard)
-        self.children.append(MonteCarloTreeSearch(childBoard, self, nextMove, isMonster=self.isMonster))
+        temp = MonteCarloTreeSearch(childBoard, self, nextMove, isMonster=self.isMonster)
+        self.children.append(temp)
+        temp.payout(newBoard)
+
 
         # simulate this move
 
+
+    def payout(self, board):
         #print("Simulating")
-        newCreature.takeTurn()
+        creature = board.currentTurn()
+        creature[1].takeTurn()
         counter = 0
-        while newBoard.winCondision() == 2:
+        while board.winCondision() == 2:
             counter += 1
-            newBoard.nextTurn()[1].takeTurn()
+            board.nextTurn()[1].takeTurn()
             # print(counter)
-        self.backPropagate(newBoard.winCondision())
+        self.backPropagate(board.winCondision())
         return
 
     def backPropagate(self, winOrLoss:int):
@@ -138,8 +144,7 @@ class MonteCarloTreeSearch:
     def n(self):
         return sum(self.winLoss)
 
-    def best_child(self, c_param=1):
-        #print("Best child")
+    def best_child(self, c_param=0.3):
         choices_weights = [(c.q() / c.n()) + c_param * np.sqrt((2 * np.log(self.n()) / c.n())) for c in self.children]
         return self.children[np.argmax(choices_weights)]
 
